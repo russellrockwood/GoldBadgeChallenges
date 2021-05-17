@@ -6,9 +6,15 @@ namespace _01_KomodoCafe_Tests
     [TestClass]
     public class KomodoCafePOCOTests
     {
+        //AAA
+
+        //Arrange 
+        //Act
+        //Assert
         [TestMethod]
-        public void TestMethod1()
+        public void TestMethod()
         {
+            
         }
     }
 }

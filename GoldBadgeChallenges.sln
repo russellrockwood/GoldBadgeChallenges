@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01_KomodoCafe_Console", "01
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01_KomodoCafe_Tests", "01_KomodoCafe_Tests\01_KomodoCafe_Tests.csproj", "{F3A5F8DF-7BC0-40B7-9CF5-D2D3C2EDDA10}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01_KomodoCafe_Repository", "01_KomodoCafe_Repository\01_KomodoCafe_Repository.csproj", "{3AF05666-9B58-4778-9B7F-80221F820A98}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F3A5F8DF-7BC0-40B7-9CF5-D2D3C2EDDA10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3A5F8DF-7BC0-40B7-9CF5-D2D3C2EDDA10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3A5F8DF-7BC0-40B7-9CF5-D2D3C2EDDA10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AF05666-9B58-4778-9B7F-80221F820A98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AF05666-9B58-4778-9B7F-80221F820A98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AF05666-9B58-4778-9B7F-80221F820A98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AF05666-9B58-4778-9B7F-80221F820A98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
