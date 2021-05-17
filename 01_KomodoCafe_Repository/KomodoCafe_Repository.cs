@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _01_KomodoCafe_Repository
 {
-    public class Class1
+    class KomodoCafe_Repository
     {
     }
 }
