@@ -17,7 +17,7 @@ namespace _01_KomodoCafe_Repository
             _menuItems.Add(newItem);
 
             return (menuItemCount < _menuItems.Count) ? true : false;
-            
+
         }
 
         public List<KomodoCafeItem> GetAllMenuItems()
@@ -38,11 +38,22 @@ namespace _01_KomodoCafe_Repository
             return null;
         }
 
-        //public bool UpdateMenuItem(KomodoCafeItem)
-        //{
+        public bool UpdateMenuItem(int itemNumber, KomodoCafeItem newItemValues)
+        {
+            KomodoCafeItem oldItem = GetItemByNumber(itemNumber);
+            if (oldItem != null)
+            {
+                oldItem.MealNumber = newItemValues.MealNumber;
+                oldItem.MealName = newItemValues.MealName;
+                oldItem.Description = newItemValues.Description;
+                oldItem.Ingredients = newItemValues.Ingredients;
+                oldItem.Price = newItemValues.Price;
 
-        //    return false;
-        //}
+                return true;
+            }
+
+            return false;
+        }
     }
 }
 

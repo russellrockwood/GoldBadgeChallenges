@@ -60,5 +60,25 @@ namespace _01_KomodoCafe_Tests
             Assert.AreEqual("Corndog", retrievedItem2.MealName);
         }
 
+        private KomodoCafeItem _menuItem;
+        private KomodoCafeRepository _fullMenu;
+        [TestInitialize]
+        public void Arrange()
+        {
+            _fullMenu = new KomodoCafeRepository();
+            _menuItem = new KomodoCafeItem(4, "Burger", "Cow meat with cheese", new List<string>() { "wild cow", "ketchup", "Fries", "relish" }, 7.95);
+            _fullMenu.AddNewMenuItem(_menuItem);
+        }
+
+        [TestMethod]
+        public void UpdateMenuItem_ShouldReturnTrue()
+        {
+            bool itemWasUpdated = _fullMenu.UpdateMenuItem(4, new KomodoCafeItem(4, "Burger", "Organic cow meat with cheese", new List<string>() { "wild cow", "ketchup", "Fries", "relish" }, 8.95));
+
+            Console.WriteLine($"Updated Description: {_menuItem.Description}\n" +
+                $"Updated Price: ${_menuItem.Price}");
+            Assert.AreEqual("Organic cow meat with cheese", _menuItem.Description);
+        }
+
     }
 }
