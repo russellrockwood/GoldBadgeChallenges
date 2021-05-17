@@ -41,7 +41,7 @@ namespace _01_KomodoCafe_Tests
         [TestMethod]
         public void GetItemByNumber_ShouldReturnCorrectItem()
         {
-            KomodoCafeItem menuItem = new KomodoCafeItem(5, "Corndog", "Corn with dog meat", new List<string>() { "bread", "meat", "starch", "sugar"}, 5.95);
+            KomodoCafeItem menuItem = new KomodoCafeItem(5, "Corndog", "Corn with dog meat", new List<string>() { "bread", "meat", "starch", "sugar" }, 5.95);
             KomodoCafeItem menuItem2 = new KomodoCafeItem(4, "Burger", "Cow meat with cheese", new List<string>() { "wild cow", "ketchup", "Fries", "relish" }, 7.95);
 
             KomodoCafeRepository repository = new KomodoCafeRepository();
@@ -78,6 +78,19 @@ namespace _01_KomodoCafe_Tests
             Console.WriteLine($"Updated Description: {_menuItem.Description}\n" +
                 $"Updated Price: ${_menuItem.Price}");
             Assert.AreEqual("Organic cow meat with cheese", _menuItem.Description);
+        }
+
+        [TestMethod]
+        public void DeleteMenuItem_ShouldReturnTrue()
+        {
+            bool itemWasDeleted = _fullMenu.DeleteMenuItem(4);
+            KomodoCafeItem checkForItem = _fullMenu.GetItemByNumber(4);
+
+            if (checkForItem == null)
+            {
+                Console.WriteLine($"Get all menu items null triggered");
+            }
+            Assert.IsTrue(itemWasDeleted);
         }
 
     }

@@ -54,6 +54,17 @@ namespace _01_KomodoCafe_Repository
 
             return false;
         }
+
+        public bool DeleteMenuItem(int itemNumber)
+        {
+            KomodoCafeItem itemToDelete = GetItemByNumber(itemNumber);
+            if (itemToDelete != null)
+            {
+                _menuItems.Remove(itemToDelete);
+                return true;
+            }
+            return false;
+        }
     }
 }
 
