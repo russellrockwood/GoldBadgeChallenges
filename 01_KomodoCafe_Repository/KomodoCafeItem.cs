@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _01_KomodoCafe_Repository
 {
-    public class KomodoCafe
+    public class KomodoCafeItem
     {
         public int MealNumber { get; set; }
         public string MealName { get; set; }
@@ -14,8 +14,8 @@ namespace _01_KomodoCafe_Repository
         public List<string> Ingredients { get; set; }
         public double Price { get; set; }
 
-        public KomodoCafe() { }
-        public KomodoCafe(int mealNumber, string mealName, string description, List<string> ingredients, double price)
+        public KomodoCafeItem() { }
+        public KomodoCafeItem(int mealNumber, string mealName, string description, List<string> ingredients, double price)
         {
             MealNumber = mealNumber;
             MealName = mealName;

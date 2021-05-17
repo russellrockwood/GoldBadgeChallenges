@@ -8,9 +8,9 @@ namespace _01_KomodoCafe_Repository
 {
     public class KomodoCafeRepository
     {
-        private readonly List<KomodoCafe> _menuItems = new List<KomodoCafe>();
+        private readonly List<KomodoCafeItem> _menuItems = new List<KomodoCafeItem>();
 
-        public bool AddNewMenuItem(KomodoCafe newItem)
+        public bool AddNewMenuItem(KomodoCafeItem newItem)
         {
             int menuItemCount = _menuItems.Count;
 
@@ -18,6 +18,11 @@ namespace _01_KomodoCafe_Repository
 
             return (menuItemCount < _menuItems.Count) ? true : false;
             
+        }
+
+        public List<KomodoCafeItem> GetAllMenuItems()
+        {
+            return _menuItems;
         }
     }
 }

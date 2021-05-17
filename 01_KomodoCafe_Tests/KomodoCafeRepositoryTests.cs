@@ -1,6 +1,7 @@
 ﻿using _01_KomodoCafe_Repository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 
 namespace _01_KomodoCafe_Tests
 {
@@ -16,12 +17,25 @@ namespace _01_KomodoCafe_Tests
         [TestMethod]
         public void AddNewMenuItem_ShouldReturnCorrectBool()
         {
-            KomodoCafe menu = new KomodoCafe();
+            KomodoCafeItem menuItem = new KomodoCafeItem();
             KomodoCafeRepository repository = new KomodoCafeRepository();
 
-            bool itemAdded = repository.AddNewMenuItem(menu);
+            bool itemAdded = repository.AddNewMenuItem(menuItem);
             Console.WriteLine($"Was item added?: {itemAdded}");
             Assert.IsTrue(itemAdded);
+        }
+
+        [TestMethod]
+        public void GetAllMenuItems_ShouldReturnCollection()
+        {
+            KomodoCafeItem menuItem = new KomodoCafeItem();
+            KomodoCafeRepository repository = new KomodoCafeRepository();
+            repository.AddNewMenuItem(menuItem);
+
+            List<KomodoCafeItem> fullMenu = repository.GetAllMenuItems();
+            bool menuContainsItems = fullMenu.Contains(menuItem);
+
+            Assert.IsTrue(menuContainsItems);
         }
 
     }
