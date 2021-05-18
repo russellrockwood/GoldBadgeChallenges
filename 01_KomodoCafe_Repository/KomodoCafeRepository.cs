@@ -13,7 +13,6 @@ namespace _01_KomodoCafe_Repository
         public bool AddNewMenuItem(KomodoCafeItem newItem)
         {
             int menuItemCount = _menuItems.Count;
-
             _menuItems.Add(newItem);
 
             return (menuItemCount < _menuItems.Count) ? true : false;
