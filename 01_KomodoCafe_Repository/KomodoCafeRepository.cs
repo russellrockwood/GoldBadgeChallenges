@@ -64,6 +64,16 @@ namespace _01_KomodoCafe_Repository
             }
             return false;
         }
+
+        public int GetMenuCount()
+        {
+            int count = 0;
+            foreach (KomodoCafeItem item in _menuItems)
+            {
+                count += 1;
+            }
+            return count;
+        }
     }
 }
 

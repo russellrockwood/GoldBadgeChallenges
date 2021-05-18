@@ -77,10 +77,25 @@ namespace _01_KomodoCafe_Console
             Console.Clear();
             KomodoCafeItem newItem = new KomodoCafeItem();
 
-            //Console.WriteLine("Enter the MealNumber\n" +
-            //    "");
-            //string mealNumberString = Console.ReadLine();
-            //newItem.MealNumber = Convert.Double(mealNumberString); 
+            int count = _repo.GetMenuCount();
+            
+            bool invalidMealNumber = true;
+            while (invalidMealNumber)
+            {
+                Console.WriteLine("Enter the MealNumber\n" +
+                $"Number must be {count + 1} or greater.");
+                int newMealNumber = Convert.ToInt32(Console.ReadLine());
+                if (newMealNumber <= count)
+                {
+                    Console.WriteLine("That meal number is taken.");
+                }
+                else
+                {
+                    newItem.MealNumber = newMealNumber;
+                    invalidMealNumber = false;
+                }
+            }
+            
 
             Console.WriteLine("Enter Mealname:");
             newItem.MealName = Console.ReadLine();
@@ -141,11 +156,43 @@ namespace _01_KomodoCafe_Console
         {
             Console.Clear();
             KomodoCafeItem newItem = new KomodoCafeItem();
+            int count = _repo.GetMenuCount();
 
-            Console.WriteLine("Enter Mealnumber of Item to Update");
+            //bool invalidOldItemNumber = true;
+            //while (invalidOldItemNumber)
+            //{
+            //    Console.WriteLine("Enter the meal number of item to update:");
+            //    int oldItemNumber = Convert.ToInt32(Console.ReadLine());
+            //    KomodoCafeItem oldItem = _repo.GetItemByNumber(oldItemNumber);
+            //    if (oldItemNumber > count)
+            //    {
+            //        Console.WriteLine($"Item number out of range. There are only {count} items.");
+            //    }
+            //    else
+            //    {
+            //        invalidOldItemNumber = false;
+            //    }
+            //}
+
+            Console.WriteLine("Enter the meal number of item to update:");
             int oldItemNumber = Convert.ToInt32(Console.ReadLine());
 
-            //KomodoCafeItem oldItem = _repo.GetItemByNumber(oldItemNumber);
+            bool invalidMealNumber = true;
+            while (invalidMealNumber)
+            {
+                Console.WriteLine("Enter New MealNumber\n" +
+                $"Number must be {count + 1} or greater.");
+                int newMealNumber = Convert.ToInt32(Console.ReadLine());
+                if (newMealNumber <= count)
+                {
+                    Console.WriteLine("That meal number is taken.");
+                }
+                else
+                {
+                    newItem.MealNumber = newMealNumber;
+                    invalidMealNumber = false;
+                }
+            }
 
             Console.WriteLine("Enter New Mealname:");
             newItem.MealName = Console.ReadLine();
