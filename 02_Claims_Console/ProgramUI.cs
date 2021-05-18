@@ -10,6 +10,7 @@ namespace _02_Claims_Console
     public class ProgramUI
     {
         private ClaimsRepository _repo = new ClaimsRepository();
+        private Queue<Claim> _repoQueue = new Queue<Claim>();
 
         public void Run()
         {
@@ -19,10 +20,14 @@ namespace _02_Claims_Console
 
         public void SeedClaimsList() 
         {
-            Claim claim1 = new Claim(4, ClaimType.Home, "House burned down. Victim of arson.", 234000, new DateTime(2020, 12, 24), new DateTime(2020, 12, 25));
-            _repo = new ClaimsRepository();
-            Claim claim2 = new Claim(2, ClaimType.Vehicle, "Crashed motorcycle after high speed chase.", 1400.63, new DateTime(2020, 09, 15), new DateTime(2020, 10, 15));
-            Claim claim3 = new Claim(3, ClaimType.Theft, "Home invasion and robbery. Gaming consoles and computers stolen.", 3500, new DateTime(2020, 09, 15), new DateTime(2020, 10, 15));
+            Claim claim1 = new Claim(4, ClaimType.Home, "House burned down.", 234000, new DateTime(2020, 12, 24), new DateTime(2020, 12, 25));
+            Claim claim2 = new Claim(2, ClaimType.Vehicle, "Crashed motorcycle.", 1400.63, new DateTime(2020, 09, 15), new DateTime(2020, 10, 15));
+            Claim claim3 = new Claim(3, ClaimType.Theft, "Home invasion/robbery.", 3500, new DateTime(2020, 09, 15), new DateTime(2020, 10, 15));
+
+            _repoQueue.Enqueue(claim1);
+            _repoQueue.Enqueue(claim2);
+            _repoQueue.Enqueue(claim3);
+
             _repo.AddNewClaim(claim1);
             _repo.AddNewClaim(claim2);
             _repo.AddNewClaim(claim3);
@@ -31,7 +36,56 @@ namespace _02_Claims_Console
         public void Menu()
         {
             Console.WriteLine("~Komodo Insurance~");
-            Console.ReadLine();
+            bool isRunning = true;
+            while (isRunning)
+            {
+                Console.WriteLine("Choose a menu item:\n" +
+                    "1. See all claims\n" +
+                    "2. Handle next claim\n" +
+                    "3. Enter new claim\n" +
+                    "4. Exit console");
+                string userInput = Console.ReadLine();
+
+                switch (userInput)
+                {
+                    case "1":
+                        SeeAllClaims();
+                        break;
+
+                    case "2":
+                        // HandleNextClaim()
+                        break;
+
+                    case "3":
+                        // EnterNewClaim()
+                        break;
+
+                    case "4":
+                        Console.WriteLine("Press any key to exit");
+                        Console.ReadKey();
+                        isRunning = false;
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid entry");
+                        break;
+                }
+            }
+        }
+
+        public void SeeAllClaims()
+        {
+            Console.Clear();
+            List<Claim> claimsDirectory = _repo.GetAllClaims();
+            //Console.WriteLine(("-|- Name: " + myList[i].GetName()).PadRight(20, ' ') +
+            //      ("| Surname: " + myList[i].GetName()) + "|".PadRight(20, ' ');
+
+            Console.WriteLine(("ClaimId").PadRight(25) + ("Type").PadRight(25) + ("Description").PadRight(25) + ("Amount").PadRight(25) + ("DateOfAccident").PadRight(25) + ("DateOfClaim").PadRight(25) + ("IsValid").PadRight(25));
+            foreach (Claim item in claimsDirectory)
+            {
+                Console.WriteLine(($"{item.ClaimID}").PadRight(25) + ($"{item.TypeOfClaim}").PadRight(25) + ($"{item.Description}").PadRight(25) + ($"{item.ClaimAmount}").PadRight(25) + ($"{item.DateOfIncident.ToString("d")}").PadRight(25) + ($"{item.DateOfClaim.ToString("d")}").PadRight(25) + ($"{item.IsValid}").PadRight(25));
+            }
+
         }
 
     }
