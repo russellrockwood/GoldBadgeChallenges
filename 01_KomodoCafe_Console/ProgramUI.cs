@@ -10,6 +10,7 @@ namespace _01_KomodoCafe_Console
     public class ProgramUI
     {
         private KomodoCafeRepository _repo = new KomodoCafeRepository();
+        
         public void Run()
         {
             SeedMenuList();
@@ -51,13 +52,13 @@ namespace _01_KomodoCafe_Console
                         AddItem();
                         break;
                     case "2":
-                        // DisplayMenu();
+                        DisplayMenu();
                         break;
                     case "3":
-                        // UpdateItem();
+                        UpdateItem();
                         break;
                     case "4":
-                        // DeleteItem();
+                        DeleteItem();
                         break;
                     case "5":
                         isRunning = false;
@@ -107,6 +108,7 @@ namespace _01_KomodoCafe_Console
                 }
                 
             }
+            newItem.Ingredients = newIngredientList;
 
             Console.WriteLine("Enter Price:");
             newItem.Price = Convert.ToDouble(Console.ReadLine());
@@ -122,5 +124,85 @@ namespace _01_KomodoCafe_Console
             }
         }
 
+        public void DisplayMenu()
+        {
+            Console.Clear();
+            List<KomodoCafeItem> fullMenu = _repo.GetAllMenuItems();
+
+            foreach (KomodoCafeItem item in fullMenu)
+            {
+                Console.WriteLine($"Item: {item.MealName}\n" +
+                    $"Description: {item.Description}\n" +
+                    $"Price: {item.Price}\n");
+            }
+        }
+
+        public void UpdateItem() 
+        {
+            Console.Clear();
+            KomodoCafeItem newItem = new KomodoCafeItem();
+
+            Console.WriteLine("Enter Mealnumber of Item to Update");
+            int oldItemNumber = Convert.ToInt32(Console.ReadLine());
+
+            //KomodoCafeItem oldItem = _repo.GetItemByNumber(oldItemNumber);
+
+            Console.WriteLine("Enter New Mealname:");
+            newItem.MealName = Console.ReadLine();
+
+            Console.WriteLine("Enter New Description:");
+            newItem.Description = Console.ReadLine();
+
+            List<string> newIngredientList = new List<string>();
+            bool addMoreIngredients = true;
+            while (addMoreIngredients)
+            {
+
+                Console.WriteLine("Enter Ingredient:\n" +
+                    "Enter \"Done\" when finished");
+                string userInput = Console.ReadLine();
+
+                if (userInput.ToLower() == "done")
+                {
+                    addMoreIngredients = false;
+                }
+                else
+                {
+                    newIngredientList.Add(userInput);
+                    Console.WriteLine("Ingredient Added");
+                }
+
+            }
+            newItem.Ingredients = newIngredientList;
+
+            Console.WriteLine("Enter New Price:");
+            newItem.Price = Convert.ToDouble(Console.ReadLine());
+
+            bool itemUpdated = _repo.UpdateMenuItem(oldItemNumber, newItem);
+            if (itemUpdated)
+            {
+                Console.WriteLine("Item succesfully updated");
+            }
+            else
+            {
+                Console.WriteLine("Error Updating Item");
+            }
+        }
+
+        public void DeleteItem()
+        {
+            Console.Clear();
+            Console.WriteLine("Enter the mealnumber of item you would like to delete:");
+            bool menuItemDeleted = _repo.DeleteMenuItem(Convert.ToInt32(Console.ReadLine()));
+
+            if (menuItemDeleted)
+            {
+                Console.WriteLine("Item successfully deleted");
+            }
+            else
+            {
+                Console.WriteLine("Error Deleting Menu Item");
+            }
+        }
     }
 }
