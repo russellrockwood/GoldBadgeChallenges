@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _02_ClaimsRepository
 {
-    class ClaimsRepository
+    public class ClaimsRepository
     {
         private readonly List<Claim> _claimsDirectory = new List<Claim>();
 
@@ -40,7 +40,7 @@ namespace _02_ClaimsRepository
             if (oldClaim != null)
             {
                 oldClaim.ClaimID = newClaim.ClaimID;
-                oldClaim.ClaimType = newClaim.ClaimType;
+                oldClaim.TypeOfClaim = newClaim.TypeOfClaim;
                 oldClaim.ClaimAmount = newClaim.ClaimAmount;
                 oldClaim.DateOfClaim = newClaim.DateOfClaim;
                 oldClaim.DateOfIncident = newClaim.DateOfIncident;

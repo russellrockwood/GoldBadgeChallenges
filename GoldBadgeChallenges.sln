@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01_KomodoCafe_Tests", "01_K
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01_KomodoCafe_Repository", "01_KomodoCafe_Repository\01_KomodoCafe_Repository.csproj", "{3AF05666-9B58-4778-9B7F-80221F820A98}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02_Claims_Console", "02_Claims_Console\02_Claims_Console.csproj", "{B5705AE0-48E9-4AE0-8378-2071BB1D0A20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02_Claims_Repository", "02_ClaimsRepository\02_Claims_Repository.csproj", "{D5147D2C-92E9-40FE-8965-AE5F78F2AC67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02_ClaimsRepository_Tests", "02_ClaimsRepository_Tests\02_ClaimsRepository_Tests.csproj", "{AD6A2128-86EB-4501-A409-373C43F5A556}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +33,18 @@ Global
 		{3AF05666-9B58-4778-9B7F-80221F820A98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3AF05666-9B58-4778-9B7F-80221F820A98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3AF05666-9B58-4778-9B7F-80221F820A98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5705AE0-48E9-4AE0-8378-2071BB1D0A20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5705AE0-48E9-4AE0-8378-2071BB1D0A20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5705AE0-48E9-4AE0-8378-2071BB1D0A20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5705AE0-48E9-4AE0-8378-2071BB1D0A20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5147D2C-92E9-40FE-8965-AE5F78F2AC67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5147D2C-92E9-40FE-8965-AE5F78F2AC67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5147D2C-92E9-40FE-8965-AE5F78F2AC67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5147D2C-92E9-40FE-8965-AE5F78F2AC67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD6A2128-86EB-4501-A409-373C43F5A556}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD6A2128-86EB-4501-A409-373C43F5A556}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD6A2128-86EB-4501-A409-373C43F5A556}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD6A2128-86EB-4501-A409-373C43F5A556}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

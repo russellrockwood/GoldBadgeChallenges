@@ -7,7 +7,7 @@
     <ProjectGuid>{B5705AE0-48E9-4AE0-8378-2071BB1D0A20}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>_02_Claims_Console</RootNamespace>
-    <AssemblyName>_02_Claims_Console</AssemblyName>
+    <AssemblyName>02_Claims_Console</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
+    <Compile Include="ProgramUI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

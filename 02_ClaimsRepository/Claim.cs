@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace _02_ClaimsRepository
 {
-    public enum ClaimType { Car, Home, Theft}
+    public enum ClaimType { Vehicle, Home, Theft}
     public class Claim
     {
         public int ClaimID { get; set; }
-        public ClaimType ClaimType { get; set; }
+        public ClaimType TypeOfClaim { get; set; }
         public string Description { get; set; }
-        public int ClaimAmount { get; set; }
+        public double ClaimAmount { get; set; }
         public DateTime DateOfIncident { get; set; }
         public DateTime DateOfClaim { get; set; }
         public bool IsValid 
@@ -26,6 +26,17 @@ namespace _02_ClaimsRepository
                 }
                 return true;
             } 
+        }
+        
+        public Claim() { }
+        public Claim(int claimId, ClaimType typeOfClaim, string description, double claimAmount, DateTime dateOfIncident, DateTime dateOfClaim)
+        {
+            ClaimID = claimId;
+            TypeOfClaim = typeOfClaim;
+            Description = description;
+            ClaimAmount = claimAmount;
+            DateOfIncident = dateOfIncident;
+            DateOfClaim = dateOfClaim;
         }
     }
 }
