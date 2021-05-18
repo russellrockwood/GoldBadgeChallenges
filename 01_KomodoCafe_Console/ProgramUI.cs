@@ -158,6 +158,8 @@ namespace _01_KomodoCafe_Console
             KomodoCafeItem newItem = new KomodoCafeItem();
             int count = _repo.GetMenuCount();
 
+            // ** Use Contains method
+
             //bool invalidOldItemNumber = true;
             //while (invalidOldItemNumber)
             //{
