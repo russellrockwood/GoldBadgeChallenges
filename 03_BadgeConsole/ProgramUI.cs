@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _03_BadgeConsole
 {
-    class ProgramUI
+    public class ProgramUI
     {
     }
 }

@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace _03_BadgeRepository
 {
-    public class Class1
+    public enum Doors { A1, A2, A3, A4, B1, B2, B3, B4, EscapeTunnel}
+    public class Badge
     {
+        public int BadgeNumber { get; set; }
+        public List<Doors> DoorAccess { get; set; }
     }
 }

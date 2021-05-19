@@ -8,5 +8,6 @@ namespace _03_BadgeRepository
 {
     public class BadgeRepository
     {
+        Dictionary<int, List<Doors>> _accessDirectory = new Dictionary<int, List<Doors>>();
     }
 }
