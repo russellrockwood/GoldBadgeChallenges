@@ -36,19 +36,31 @@ namespace _03_BadgeRepository
             return null;
         }
 
-        public bool AddDoorAccess(int badgeNumber, List<Doors> newDoorList)
+        public bool AddDoorAccess(int badgeNumber, Doors newDoor)
         {
             List<Doors> checkBadgeExists = ViewAccessByID(badgeNumber);
             if (checkBadgeExists != null)
             {
-                List<Doors> oldDoorAccess = _accessDirectory[badgeNumber];
-                IEnumerable<Doors> newDoorAccess = oldDoorAccess.Union(newDoorList);
-                _accessDirectory[badgeNumber] = (List<Doors>)newDoorAccess;
+                //List<Doors> oldDoorList = _accessDirectory[badgeNumber];
+                //IEnumerable<Doors> newDoorAccess = oldDoorList.Union(newDoorList);
+                //_accessDirectory[badgeNumber] = (List<Doors>)newDoorAccess;
+                _accessDirectory[badgeNumber].Add(newDoor);  
                 return true;
             }
             return false;
         }
 
-        //public bool RemoveDoorAccess
+        public bool RemoveDoorAccess(int badgeNumber, Doors doorToRemove)
+        {
+            List<Doors> checkBadgeExists = ViewAccessByID(badgeNumber);
+
+            if (checkBadgeExists != null)
+            {
+                
+                _accessDirectory[badgeNumber].Remove(doorToRemove);
+                return true;
+            }
+            return false;
+        }
     }
 }
