@@ -62,7 +62,7 @@ namespace _02_Claims_Console
                         break;
 
                     case "4":
-                        // RemoveClaim();
+                        RemoveClaim();
                         break;
 
                     case "5":
@@ -185,7 +185,20 @@ namespace _02_Claims_Console
             //bool idIsNotDuplicate = _repo.CheckForDuplicateClaimId(idInput);
         }
 
-
+        public void RemoveClaim() 
+        {
+            Console.Clear();
+            Console.WriteLine("Enter Id of claim you would like to remove:");
+            bool claimDeleted = _repo.DeleteClaim(Convert.ToInt32(Console.ReadLine()));
+            if (claimDeleted)
+            {
+                Console.WriteLine("Claim succesfully deleted");
+            }
+            else
+            {
+                Console.WriteLine("Error deleting claim");
+            }
+        }
 
 
     }
