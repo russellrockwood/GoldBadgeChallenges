@@ -11,7 +11,10 @@ namespace _02_Claims_Console
     {
         private ClaimsRepository _repo = new ClaimsRepository();
         private Queue<Claim> _repoQueue = new Queue<Claim>();
-
+        
+        // handle removing claims from queue in removeclaim method
+        // check for duplicate id numbers.
+        
         public void Run()
         {
             SeedClaimsList();
@@ -44,7 +47,8 @@ namespace _02_Claims_Console
                     "2. Handle next claim\n" +
                     "3. Enter new claim\n" +
                     "4. Remove Claim From Directory\n" +
-                    "5. Exit console");
+                    "5. Update Existing Claim\n" +
+                    "6. Exit console\n");
                 string userInput = Console.ReadLine();
 
                 switch (userInput)
@@ -66,6 +70,10 @@ namespace _02_Claims_Console
                         break;
 
                     case "5":
+                        UpdateClaim();
+                        break;
+
+                    case "6":
                         Console.Clear();
                         Console.WriteLine("Press any key to exit");
                         Console.ReadKey();
@@ -200,6 +208,43 @@ namespace _02_Claims_Console
             }
         }
 
+        public void UpdateClaim()
+        {
+            Console.Clear();
+            Console.WriteLine("Enter Id of claim to update:");
+            Claim oldClaim = _repo.GetClaimById(Convert.ToInt32(Console.ReadLine()));
 
+            if (oldClaim != null)
+            {
+                Claim newClaim = new Claim();
+
+                Console.WriteLine("Select new claim type:\n" +
+                    "1. Vehicle\n" +
+                    "2. Home\n" +
+                    "3 Theft\n");
+                newClaim.TypeOfClaim = (ClaimType)Convert.ToInt32(Console.ReadLine());
+
+                Console.WriteLine("Enter a claim description:");
+                newClaim.Description = Console.ReadLine();
+
+                Console.WriteLine("Enter claim dollar amount:");
+                newClaim.ClaimAmount = Convert.ToDouble(Console.ReadLine());
+
+                
+                Console.WriteLine("Enter date of incident: yyyy/mm/dd");
+                newClaim.DateOfIncident = DateTime.Parse(Console.ReadLine());
+
+                Console.WriteLine("Enter date of claim: yyyy/mm/dd");
+                newClaim.DateOfClaim = DateTime.Parse(Console.ReadLine());
+
+                _repo.UpdateExistingClaim(oldClaim.ClaimID, newClaim);
+
+                Console.WriteLine("Claim Succesfully Updated");
+            }
+            else
+            {
+                Console.WriteLine("Could not locate claim to update");
+            }
+        }
     }
 }
