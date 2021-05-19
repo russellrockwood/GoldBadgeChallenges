@@ -9,5 +9,44 @@ namespace _03_BadgeRepository
     public class BadgeRepository
     {
         Dictionary<int, List<Doors>> _accessDirectory = new Dictionary<int, List<Doors>>();
+
+        public bool AddNewBadge(int newBadgeNumber, List<Doors> doorAccessList)
+        {
+            int startingCount = _accessDirectory.Count();
+
+            Badge newBadge = new Badge();
+            newBadge.BadgeNumber = newBadgeNumber;
+            newBadge.DoorAccess = doorAccessList;
+            _accessDirectory.Add(newBadgeNumber, doorAccessList);
+
+            if (startingCount < _accessDirectory.Count())
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public Dictionary<int, List<Doors>> GetFullDirectory()
+        {
+            return _accessDirectory;
+        }
+
+        public List<Doors> ViewAccessByID(int badgeNumber)
+        {
+            if (_accessDirectory.ContainsKey(badgeNumber))
+            {
+                return _accessDirectory[badgeNumber];
+            }
+            return null;
+        }
+
+        public bool AddDoorAccess(int badgeNumber, List<Doors> newDoorList)
+        {
+            List<Doors> oldDoorAccess = _accessDirectory[badgeNumber];
+            IEnumerable<Doors> newDoorAccess = oldDoorAccess.Union(newDoorList);
+
+            newDoorAccess = (List<Doors>)newDoorAccess;
+        }
+
     }
 }
