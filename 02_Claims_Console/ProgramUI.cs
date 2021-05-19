@@ -43,7 +43,8 @@ namespace _02_Claims_Console
                     "1. See all claims\n" +
                     "2. Handle next claim\n" +
                     "3. Enter new claim\n" +
-                    "4. Exit console");
+                    "4. Remove Claim From Directory\n" +
+                    "5. Exit console");
                 string userInput = Console.ReadLine();
 
                 switch (userInput)
@@ -53,14 +54,19 @@ namespace _02_Claims_Console
                         break;
 
                     case "2":
-                        // HandleNextClaim()
+                        HandleNextClaim();
                         break;
 
                     case "3":
-                        // EnterNewClaim()
+                        // EnterNewClaim();
                         break;
 
                     case "4":
+                        // RemoveClaim();
+                        break;
+
+                    case "5":
+                        Console.Clear();
                         Console.WriteLine("Press any key to exit");
                         Console.ReadKey();
                         isRunning = false;
@@ -70,6 +76,9 @@ namespace _02_Claims_Console
                         Console.WriteLine("Invalid entry");
                         break;
                 }
+                Console.WriteLine("Press any key to continue");
+                Console.ReadKey();
+                Console.Clear();
             }
         }
 
@@ -86,6 +95,34 @@ namespace _02_Claims_Console
                 Console.WriteLine(($"{item.ClaimID}").PadRight(25) + ($"{item.TypeOfClaim}").PadRight(25) + ($"{item.Description}").PadRight(25) + ($"{item.ClaimAmount}").PadRight(25) + ($"{item.DateOfIncident.ToString("d")}").PadRight(25) + ($"{item.DateOfClaim.ToString("d")}").PadRight(25) + ($"{item.IsValid}").PadRight(25));
             }
 
+        }
+
+        public void HandleNextClaim()
+        {
+            Console.Clear();
+            
+            Claim nextClaim = _repoQueue.Peek();
+            Console.WriteLine($"Claim ID: {nextClaim.ClaimID}\n\n" +
+                $"Type: {nextClaim.TypeOfClaim}\n\n" +
+                $"Description: {nextClaim.Description}\n\n" +
+                $"Claim Amount: ${nextClaim.ClaimAmount}\n\n" +
+                $"Date of incident: {nextClaim.DateOfIncident}\n\n" +
+                $"Date of claim: {nextClaim.DateOfClaim}\n\n" +
+                $"IsValid: {nextClaim.IsValid}\n\n");
+
+            Console.WriteLine("Would you like to deal with this claim now (y/n)");
+            string userInput = Console.ReadLine();
+
+            if (userInput.ToLower() == "y")
+            {
+                nextClaim = _repoQueue.Dequeue();
+                _repo.DeleteClaim(nextClaim.ClaimID);
+                Console.WriteLine("Claim Removed From Queue");
+            }
+            else
+            {
+                Console.WriteLine("Returning to main menu...");
+            }
         }
 
     }
