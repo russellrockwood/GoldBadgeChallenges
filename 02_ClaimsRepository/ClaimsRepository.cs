@@ -61,5 +61,18 @@ namespace _02_ClaimsRepository
             }
             return false;
         }
+
+        //public bool CheckForDuplicateClaimId(int claimId)
+        //{
+        //    foreach (Claim item in _claimsDirectory)
+        //    {
+        //        if (item.ClaimID == claimId)
+        //        {
+        //            return false;
+        //        }
+
+        //    }
+        //    return true;
+        //}
     }
 }

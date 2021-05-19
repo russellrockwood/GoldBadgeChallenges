@@ -18,7 +18,7 @@ namespace _02_Claims_Console
             Menu();
         }
 
-        public void SeedClaimsList() 
+        public void SeedClaimsList()
         {
             Claim claim1 = new Claim(4, ClaimType.Home, "House burned down.", 234000, new DateTime(2020, 12, 24), new DateTime(2020, 12, 25));
             Claim claim2 = new Claim(2, ClaimType.Vehicle, "Crashed motorcycle.", 1400.63, new DateTime(2020, 09, 15), new DateTime(2020, 10, 15));
@@ -58,7 +58,7 @@ namespace _02_Claims_Console
                         break;
 
                     case "3":
-                        // EnterNewClaim();
+                        EnterNewClaim();
                         break;
 
                     case "4":
@@ -100,7 +100,7 @@ namespace _02_Claims_Console
         public void HandleNextClaim()
         {
             Console.Clear();
-            
+
             Claim nextClaim = _repoQueue.Peek();
             Console.WriteLine($"Claim ID: {nextClaim.ClaimID}\n\n" +
                 $"Type: {nextClaim.TypeOfClaim}\n\n" +
@@ -124,6 +124,69 @@ namespace _02_Claims_Console
                 Console.WriteLine("Returning to main menu...");
             }
         }
+
+        public void EnterNewClaim()
+        {
+            Console.Clear();
+            Claim newClaim = new Claim();
+
+            Console.WriteLine("Select new claim type:\n" +
+                "1. Vehicle\n" +
+                "2. Home\n" +
+                "3 Theft\n");
+            newClaim.TypeOfClaim = (ClaimType)Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Enter a claim description:");
+            newClaim.Description = Console.ReadLine();
+
+            Console.WriteLine("Enter claim dollar amount:");
+            newClaim.ClaimAmount = Convert.ToDouble(Console.ReadLine());
+
+            //TimeSpan testTime = (DateTime.Parse("1990/09/08")) - (DateTime.Parse("1990/09/07"));
+            Console.WriteLine("Enter date of incident: yyyy/mm/dd");
+            newClaim.DateOfIncident = DateTime.Parse(Console.ReadLine());
+
+            Console.WriteLine("Enter date of claim: yyyy/mm/dd");
+            newClaim.DateOfClaim = DateTime.Parse(Console.ReadLine());
+
+            Console.WriteLine("Enter new claim ID:");
+            int idInput = Convert.ToInt32(Console.ReadLine());
+            if (_repo.GetClaimById(idInput) == null)
+            {
+                newClaim.ClaimID = idInput;
+                bool addedCorrectly = _repo.AddNewClaim(newClaim);
+                if (addedCorrectly)
+                {
+                    _repoQueue.Enqueue(newClaim);
+                    Console.WriteLine("New claim succesfully added.");
+                }
+                else
+                {
+                    Console.WriteLine("Error adding new claim.");
+                }
+            }
+            else
+            {
+                //bool duplicateClaim = true;
+                //while (duplicateClaim)
+                //{
+                //}
+                Console.WriteLine("A Claim with that ID already exists.");
+            }
+
+            //bool duplicateClaimId = _repo.GetClaimById(idInput);
+            //while (duplicateClaimId == false)
+            //{
+            //    Console.WriteLine("A Claim with that ID already exists. Please enter a new claim ID");
+            //}
+
+
+
+            //bool idIsNotDuplicate = _repo.CheckForDuplicateClaimId(idInput);
+        }
+
+
+
 
     }
 }
