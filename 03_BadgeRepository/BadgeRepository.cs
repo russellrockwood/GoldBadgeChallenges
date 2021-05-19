@@ -42,10 +42,15 @@ namespace _03_BadgeRepository
 
         public bool AddDoorAccess(int badgeNumber, List<Doors> newDoorList)
         {
-            List<Doors> oldDoorAccess = _accessDirectory[badgeNumber];
-            IEnumerable<Doors> newDoorAccess = oldDoorAccess.Union(newDoorList);
-
-            newDoorAccess = (List<Doors>)newDoorAccess;
+            List<Doors> checkBadgeExists = ViewAccessByID(badgeNumber);
+            if (checkBadgeExists != null)
+            {
+                List<Doors> oldDoorAccess = _accessDirectory[badgeNumber];
+                IEnumerable<Doors> newDoorAccess = oldDoorAccess.Union(newDoorList);
+                _accessDirectory[badgeNumber] = (List<Doors>)newDoorAccess;
+                return true;
+            }
+            return false;
         }
 
     }
