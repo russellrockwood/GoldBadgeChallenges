@@ -27,7 +27,7 @@ namespace _03_BadgeRepository
             return _accessDirectory;
         }
 
-        public List<Doors> ViewAccessByID(int badgeNumber)
+        public List<Doors> GetAccessByID(int badgeNumber)
         {
             if (_accessDirectory.ContainsKey(badgeNumber))
             {
@@ -38,7 +38,7 @@ namespace _03_BadgeRepository
 
         public bool AddDoorAccess(int badgeNumber, Doors newDoor)
         {
-            List<Doors> checkBadgeExists = ViewAccessByID(badgeNumber);
+            List<Doors> checkBadgeExists = GetAccessByID(badgeNumber);
             if (checkBadgeExists != null)
             {
                 //List<Doors> oldDoorList = _accessDirectory[badgeNumber];
@@ -52,12 +52,24 @@ namespace _03_BadgeRepository
 
         public bool RemoveDoorAccess(int badgeNumber, Doors doorToRemove)
         {
-            List<Doors> checkBadgeExists = ViewAccessByID(badgeNumber);
+            List<Doors> checkBadgeExists = GetAccessByID(badgeNumber);
 
             if (checkBadgeExists != null)
             {
-                
                 _accessDirectory[badgeNumber].Remove(doorToRemove);
+                return true;
+            }
+            return false;
+        }
+
+        public bool DeleteBadge(int badgeNumber)
+        {
+            List<Doors> checkBadgeExists = GetAccessByID(badgeNumber);
+
+            if (checkBadgeExists != null)
+            {
+
+                _accessDirectory.Remove(badgeNumber);
                 return true;
             }
             return false;

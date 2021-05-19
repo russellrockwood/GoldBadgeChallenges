@@ -8,5 +8,19 @@ namespace _03_BadgeConsole
 {
     public class ProgramUI
     {
+        public void Run()
+        {
+            SeedBadgeDictionary();
+            Menu();
+        }
+
+        public void SeedBadgeDictionary()
+        {
+
+        }
+        public void Menu()
+        {
+
+        }
     }
 }

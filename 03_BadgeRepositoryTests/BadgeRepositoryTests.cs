@@ -39,7 +39,7 @@ namespace _03_BadgeRepositoryTests
         [TestMethod]
         public void ViewAccessById_ShouldReturnCorrectList()
         {
-            List<Doors> doorAccess = _repo.ViewAccessByID(1234);
+            List<Doors> doorAccess = _repo.GetAccessByID(1234);
             bool hasCorrectDoor = doorAccess.Contains(Doors.EscapeTunnel);
             bool hasCorrectDoor2 = doorAccess.Contains(Doors.A1);
             bool hasCorrectDoor3 = doorAccess.Contains(Doors.B1);
@@ -55,12 +55,19 @@ namespace _03_BadgeRepositoryTests
             _repo.AddDoorAccess(1234, Doors.A2);
             _repo.AddDoorAccess(1234, Doors.B2);
 
-            List<Doors> newDoorAccess = _repo.ViewAccessByID(1234);
+            List<Doors> newDoorAccess = _repo.GetAccessByID(1234);
             bool hasCorrectDoor = newDoorAccess.Contains(Doors.B2);
             bool hasCorrectDoor2 = newDoorAccess.Contains(Doors.A2);
 
             Assert.IsTrue(hasCorrectDoor);
             Assert.IsTrue(hasCorrectDoor2);
+        }
+
+        [TestMethod]
+        public void DeleteBadge_ShouldReturnTrue()
+        {
+            bool badgeWasDeleted = _repo.DeleteBadge(1234);
+            Assert.IsTrue(badgeWasDeleted);
         }
     }
 }
