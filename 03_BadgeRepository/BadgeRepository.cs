@@ -10,14 +10,10 @@ namespace _03_BadgeRepository
     {
         Dictionary<int, List<Doors>> _accessDirectory = new Dictionary<int, List<Doors>>();
 
-        public bool AddNewBadge(int newBadgeNumber, List<Doors> doorAccessList)
+        public bool AddNewBadge(Badge newBadge)
         {
             int startingCount = _accessDirectory.Count();
-
-            Badge newBadge = new Badge();
-            newBadge.BadgeNumber = newBadgeNumber;
-            newBadge.DoorAccess = doorAccessList;
-            _accessDirectory.Add(newBadgeNumber, doorAccessList);
+            _accessDirectory.Add(newBadge.BadgeNumber, newBadge.DoorAccess);
 
             if (startingCount < _accessDirectory.Count())
             {
@@ -53,5 +49,6 @@ namespace _03_BadgeRepository
             return false;
         }
 
+        //public bool RemoveDoorAccess
     }
 }
