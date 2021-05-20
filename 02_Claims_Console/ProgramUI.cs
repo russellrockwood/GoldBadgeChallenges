@@ -75,8 +75,6 @@ namespace _02_Claims_Console
 
                     case "6":
                         Console.Clear();
-                        Console.WriteLine("Press any key to exit");
-                        Console.ReadKey();
                         isRunning = false;
                         break;
 
