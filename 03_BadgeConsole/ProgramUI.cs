@@ -21,8 +21,8 @@ namespace _03_BadgeConsole
         public void SeedBadgeDictionary()
         {
             Badge employee1 = new Badge(1234, new List<Doors> { Doors.A1, Doors.B1, Doors.EscapeTunnel });
-            Badge employee2 = new Badge(1235, new List<Doors> { Doors.A1, Doors.B1, Doors.EscapeTunnel });
-            Badge employee3 = new Badge(1236, new List<Doors> { Doors.A1, Doors.B1, Doors.EscapeTunnel });
+            Badge employee2 = new Badge(1235, new List<Doors> { Doors.A2, Doors.B2, Doors.A3, Doors.A4});
+            Badge employee3 = new Badge(1236, new List<Doors> {Doors.A1, Doors.A2, Doors.A3, Doors.B3, Doors.B4, Doors.EscapeTunnel });
             _repo.AddNewBadge(employee1);
             _repo.AddNewBadge(employee2);
             _repo.AddNewBadge(employee3);
@@ -52,7 +52,7 @@ namespace _03_BadgeConsole
                         break;
 
                     case "3":
-                        //SeeAllBadges();
+                        ListBadges();
                         break;
 
                     case "4":
@@ -70,6 +70,7 @@ namespace _03_BadgeConsole
                 }
                 Console.WriteLine("Press any key to continue");
                 Console.ReadKey();
+                Console.Clear();
             }
         }
 
@@ -108,6 +109,19 @@ namespace _03_BadgeConsole
             else
             {
                 Console.WriteLine("Error Adding New Badge");
+            }
+        }
+
+        public void ListBadges()
+        {
+            Console.Clear();
+            Dictionary<int, List<Doors>> badgeDirectory = _repo.GetFullDirectory();
+
+            Console.WriteLine(("Badge #").PadRight(20) + ("DoorAccess") + "\n");
+            foreach (var item in badgeDirectory)
+            {
+                Console.WriteLine(($"{item.Key}").PadRight(20) + string.Join(" ", item.Value));
+                Console.WriteLine("\n");
             }
         }
     }
