@@ -10,11 +10,6 @@ namespace _02_Claims_Console
     public class ProgramUI
     {
         private ClaimsRepository _repo = new ClaimsRepository();
-        private Queue<Claim> _repoQueue = new Queue<Claim>();
-        
-        // handle removing claims from queue in removeclaim method
-        // check for duplicate id numbers.
-        
         public void Run()
         {
             SeedClaimsList();
@@ -26,10 +21,6 @@ namespace _02_Claims_Console
             Claim claim1 = new Claim(4, ClaimType.Home, "House burned down.", 234000, new DateTime(2020, 12, 24), new DateTime(2020, 12, 25));
             Claim claim2 = new Claim(2, ClaimType.Vehicle, "Crashed motorcycle.", 1400.63, new DateTime(2020, 09, 15), new DateTime(2020, 10, 15));
             Claim claim3 = new Claim(3, ClaimType.Theft, "Home invasion/robbery.", 3500, new DateTime(2020, 09, 15), new DateTime(2020, 10, 15));
-
-            _repoQueue.Enqueue(claim1);
-            _repoQueue.Enqueue(claim2);
-            _repoQueue.Enqueue(claim3);
 
             _repo.AddNewClaim(claim1);
             _repo.AddNewClaim(claim2);
@@ -92,22 +83,20 @@ namespace _02_Claims_Console
         {
             Console.Clear();
             List<Claim> claimsDirectory = _repo.GetAllClaims();
-            //Console.WriteLine(("-|- Name: " + myList[i].GetName()).PadRight(20, ' ') +
-            //      ("| Surname: " + myList[i].GetName()) + "|".PadRight(20, ' ');
 
             Console.WriteLine(("ClaimId").PadRight(25) + ("Type").PadRight(25) + ("Description").PadRight(25) + ("Amount").PadRight(25) + ("DateOfAccident").PadRight(25) + ("DateOfClaim").PadRight(25) + ("IsValid").PadRight(25));
             foreach (Claim item in claimsDirectory)
             {
                 Console.WriteLine(($"{item.ClaimID}").PadRight(25) + ($"{item.TypeOfClaim}").PadRight(25) + ($"{item.Description}").PadRight(25) + ($"{item.ClaimAmount}").PadRight(25) + ($"{item.DateOfIncident.ToString("d")}").PadRight(25) + ($"{item.DateOfClaim.ToString("d")}").PadRight(25) + ($"{item.IsValid}").PadRight(25));
             }
-
         }
 
         public void HandleNextClaim()
         {
             Console.Clear();
 
-            Claim nextClaim = _repoQueue.Peek();
+            List<Claim> claimsList = _repo.GetAllClaims();
+            Claim nextClaim = claimsList[0];
             Console.WriteLine($"Claim ID: {nextClaim.ClaimID}\n\n" +
                 $"Type: {nextClaim.TypeOfClaim}\n\n" +
                 $"Description: {nextClaim.Description}\n\n" +
@@ -121,7 +110,6 @@ namespace _02_Claims_Console
 
             if (userInput.ToLower() == "y")
             {
-                nextClaim = _repoQueue.Dequeue();
                 _repo.DeleteClaim(nextClaim.ClaimID);
                 Console.WriteLine("Claim Removed From Queue");
             }
@@ -148,7 +136,6 @@ namespace _02_Claims_Console
             Console.WriteLine("Enter claim dollar amount:");
             newClaim.ClaimAmount = Convert.ToDouble(Console.ReadLine());
 
-            //TimeSpan testTime = (DateTime.Parse("1990/09/08")) - (DateTime.Parse("1990/09/07"));
             Console.WriteLine("Enter date of incident: yyyy/mm/dd");
             newClaim.DateOfIncident = DateTime.Parse(Console.ReadLine());
 
@@ -161,10 +148,13 @@ namespace _02_Claims_Console
             {
                 newClaim.ClaimID = idInput;
                 bool addedCorrectly = _repo.AddNewClaim(newClaim);
-                if (addedCorrectly)
+                if (addedCorrectly && newClaim.IsValid)
                 {
-                    _repoQueue.Enqueue(newClaim);
                     Console.WriteLine("New claim succesfully added.");
+                }
+                else if (newClaim.IsValid == false)
+                {
+                    Console.WriteLine("Claim is not valid.");
                 }
                 else
                 {
@@ -173,22 +163,8 @@ namespace _02_Claims_Console
             }
             else
             {
-                //bool duplicateClaim = true;
-                //while (duplicateClaim)
-                //{
-                //}
                 Console.WriteLine("A Claim with that ID already exists.");
             }
-
-            //bool duplicateClaimId = _repo.GetClaimById(idInput);
-            //while (duplicateClaimId == false)
-            //{
-            //    Console.WriteLine("A Claim with that ID already exists. Please enter a new claim ID");
-            //}
-
-
-
-            //bool idIsNotDuplicate = _repo.CheckForDuplicateClaimId(idInput);
         }
 
         public void RemoveClaim() 

@@ -13,7 +13,11 @@ namespace _02_ClaimsRepository
         public bool AddNewClaim(Claim newClaim)
         {
             int startingCount = _claimsDirectory.Count;
-            _claimsDirectory.Add(newClaim);
+            if (newClaim.IsValid)
+            {
+                _claimsDirectory.Add(newClaim);
+                return true;
+            }
             return startingCount < _claimsDirectory.Count ? true : false;
         }
 
@@ -61,18 +65,5 @@ namespace _02_ClaimsRepository
             }
             return false;
         }
-
-        //public bool CheckForDuplicateClaimId(int claimId)
-        //{
-        //    foreach (Claim item in _claimsDirectory)
-        //    {
-        //        if (item.ClaimID == claimId)
-        //        {
-        //            return false;
-        //        }
-
-        //    }
-        //    return true;
-        //}
     }
 }

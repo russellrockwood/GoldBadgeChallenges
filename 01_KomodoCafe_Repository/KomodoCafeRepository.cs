@@ -9,7 +9,6 @@ namespace _01_KomodoCafe_Repository
     public class KomodoCafeRepository
     {
         private readonly List<KomodoCafeItem> _menuItems = new List<KomodoCafeItem>();
-
         public bool AddNewMenuItem(KomodoCafeItem newItem)
         {
             int menuItemCount = _menuItems.Count;
@@ -18,12 +17,10 @@ namespace _01_KomodoCafe_Repository
             return (menuItemCount < _menuItems.Count) ? true : false;
 
         }
-
         public List<KomodoCafeItem> GetAllMenuItems()
         {
             return _menuItems;
         }
-
         public KomodoCafeItem GetItemByNumber(int mealNumber)
         {
             foreach (var menuItem in _menuItems)
@@ -33,10 +30,8 @@ namespace _01_KomodoCafe_Repository
                     return menuItem;
                 }
             }
-
             return null;
         }
-
         public bool UpdateMenuItem(int itemNumber, KomodoCafeItem newItemValues)
         {
             KomodoCafeItem oldItem = GetItemByNumber(itemNumber);
@@ -53,7 +48,6 @@ namespace _01_KomodoCafe_Repository
 
             return false;
         }
-
         public bool DeleteMenuItem(int itemNumber)
         {
             KomodoCafeItem itemToDelete = GetItemByNumber(itemNumber);
@@ -64,21 +58,5 @@ namespace _01_KomodoCafe_Repository
             }
             return false;
         }
-
-        public int GetMenuCount()
-        {
-            int count = 0;
-            foreach (KomodoCafeItem item in _menuItems)
-            {
-                count += 1;
-            }
-            return count;
-        }
     }
 }
-
-/*Your Task:
-Create a MenuItem Class with properties, constructors, and fields.
-Create a MenuRepository Class that has methods needed.
-Create a Test Class for your repository methods. (You don't need to test your constructors or objects, just your methods)
-Create a Program file that allows the cafe manager to add, update, and delete, and see all items in the menu list. */

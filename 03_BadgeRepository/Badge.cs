@@ -12,7 +12,6 @@ namespace _03_BadgeRepository
         public int BadgeNumber { get; set; }
         public List<Doors> DoorAccess { get; set; }
         public Badge() { }
-
         public Badge(int badgeNumber, List<Doors> doorAccess)
         {
             BadgeNumber = badgeNumber;

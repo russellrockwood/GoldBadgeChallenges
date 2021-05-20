@@ -10,19 +10,18 @@ namespace _03_BadgeConsole
 {
     public class ProgramUI
     {
-        //private Dictionary<int, List<Doors>> _repo = new Dictionary<int, List<Doors>>();
         BadgeRepository _repo = new BadgeRepository();
+        // Use List<Type> uniqueLst = list.Distinct().ToList(); to remove muliple occurences
         public void Run()
         {
             SeedBadgeDictionary();
             Menu();
         }
-
         public void SeedBadgeDictionary()
         {
-            Badge employee1 = new Badge(1234, new List<Doors> { Doors.A1, Doors.B1, Doors.EscapeTunnel });
+            Badge employee1 = new Badge(1234, new List<Doors> { Doors.A1, Doors.B1, Doors.ESCAPETUNNEL });
             Badge employee2 = new Badge(1235, new List<Doors> { Doors.A2, Doors.B2, Doors.A3, Doors.A4 });
-            Badge employee3 = new Badge(1236, new List<Doors> { Doors.A1, Doors.A2, Doors.A3, Doors.B3, Doors.B4, Doors.EscapeTunnel });
+            Badge employee3 = new Badge(1236, new List<Doors> { Doors.A1, Doors.A2, Doors.A3, Doors.B3, Doors.B4, Doors.ESCAPETUNNEL });
             _repo.AddNewBadge(employee1);
             _repo.AddNewBadge(employee2);
             _repo.AddNewBadge(employee3);
@@ -73,7 +72,6 @@ namespace _03_BadgeConsole
                 Console.Clear();
             }
         }
-
         public void AddBadge()
         {
             Console.Clear();
@@ -194,7 +192,6 @@ namespace _03_BadgeConsole
                         break;
                 }
             }
-
         }
         public void ListBadges()
         {

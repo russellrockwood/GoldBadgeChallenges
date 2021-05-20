@@ -9,15 +9,13 @@ namespace _01_KomodoCafe_Console
 {
     public class ProgramUI
     {
-        private KomodoCafeRepository _repo = new KomodoCafeRepository();
-        
+        private KomodoCafeRepository _repo = new KomodoCafeRepository();       
         public void Run()
         {
             SeedMenuList();
             Menu();
 
         }
-
         public void SeedMenuList()
         {
             KomodoCafeItem menuItem = new KomodoCafeItem(1, "Corndog", "Corn with dog meat", new List<string>() { "bread", "meat", "starch", "sugar" }, 5.95);
@@ -63,21 +61,19 @@ namespace _01_KomodoCafe_Console
                     case "5":
                         isRunning = false;
                         break;
-
                     default:
                         Console.WriteLine("Invalid Entry");
                         break;
                 }
             }
         }
-
-
         public void AddItem()
         {
             Console.Clear();
             KomodoCafeItem newItem = new KomodoCafeItem();
 
-            int count = _repo.GetMenuCount();
+            List<KomodoCafeItem> fullmenu = _repo.GetAllMenuItems();
+            int count = fullmenu.Count();
             
             bool invalidMealNumber = true;
             while (invalidMealNumber)
@@ -96,7 +92,6 @@ namespace _01_KomodoCafe_Console
                 }
             }
             
-
             Console.WriteLine("Enter Mealname:");
             newItem.MealName = Console.ReadLine();
 
@@ -106,8 +101,7 @@ namespace _01_KomodoCafe_Console
             List<string> newIngredientList = new List<string>();
             bool addMoreIngredients = true;
             while (addMoreIngredients)
-            {
-                
+            { 
                 Console.WriteLine("Enter Ingredient:\n" +
                     "Enter \"Done\" when finished");
                 string userInput = Console.ReadLine();
@@ -120,8 +114,7 @@ namespace _01_KomodoCafe_Console
                 {
                     newIngredientList.Add(userInput);
                     Console.WriteLine("Ingredient Added");
-                }
-                
+                }               
             }
             newItem.Ingredients = newIngredientList;
 
@@ -138,7 +131,6 @@ namespace _01_KomodoCafe_Console
                 Console.WriteLine("Error adding menu item");
             }
         }
-
         public void DisplayMenu()
         {
             Console.Clear();
@@ -151,30 +143,12 @@ namespace _01_KomodoCafe_Console
                     $"Price: {item.Price}\n");
             }
         }
-
         public void UpdateItem() 
         {
             Console.Clear();
             KomodoCafeItem newItem = new KomodoCafeItem();
-            int count = _repo.GetMenuCount();
-
-            // ** Use Contains method
-
-            //bool invalidOldItemNumber = true;
-            //while (invalidOldItemNumber)
-            //{
-            //    Console.WriteLine("Enter the meal number of item to update:");
-            //    int oldItemNumber = Convert.ToInt32(Console.ReadLine());
-            //    KomodoCafeItem oldItem = _repo.GetItemByNumber(oldItemNumber);
-            //    if (oldItemNumber > count)
-            //    {
-            //        Console.WriteLine($"Item number out of range. There are only {count} items.");
-            //    }
-            //    else
-            //    {
-            //        invalidOldItemNumber = false;
-            //    }
-            //}
+            List<KomodoCafeItem> fullmenu = _repo.GetAllMenuItems();
+            int count = fullmenu.Count();
 
             Console.WriteLine("Enter the meal number of item to update:");
             int oldItemNumber = Convert.ToInt32(Console.ReadLine());
@@ -237,7 +211,6 @@ namespace _01_KomodoCafe_Console
                 Console.WriteLine("Error Updating Item");
             }
         }
-
         public void DeleteItem()
         {
             Console.Clear();

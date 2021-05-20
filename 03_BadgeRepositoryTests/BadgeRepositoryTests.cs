@@ -14,7 +14,7 @@ namespace _03_BadgeRepositoryTests
         public void Arrange()
         {
             _repo = new BadgeRepository();
-            _badge = new Badge(1234, new List<Doors> { Doors.A1, Doors.B1, Doors.EscapeTunnel});
+            _badge = new Badge(1234, new List<Doors> { Doors.A1, Doors.B1, Doors.ESCAPETUNNEL});
             _repo.AddNewBadge(_badge);
         }
         [TestMethod]
@@ -40,7 +40,7 @@ namespace _03_BadgeRepositoryTests
         public void ViewAccessById_ShouldReturnCorrectList()
         {
             List<Doors> doorAccess = _repo.GetAccessByID(1234);
-            bool hasCorrectDoor = doorAccess.Contains(Doors.EscapeTunnel);
+            bool hasCorrectDoor = doorAccess.Contains(Doors.ESCAPETUNNEL);
             bool hasCorrectDoor2 = doorAccess.Contains(Doors.A1);
             bool hasCorrectDoor3 = doorAccess.Contains(Doors.B1);
 
