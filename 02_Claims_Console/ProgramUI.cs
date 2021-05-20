@@ -29,7 +29,7 @@ namespace _02_Claims_Console
 
         public void Menu()
         {
-            Console.WriteLine("~Komodo Insurance~");
+            Console.WriteLine("~ Komodo Insurance ~\n");
             bool isRunning = true;
             while (isRunning)
             {
@@ -85,10 +85,12 @@ namespace _02_Claims_Console
             List<Claim> claimsDirectory = _repo.GetAllClaims();
 
             Console.WriteLine(("ClaimId").PadRight(25) + ("Type").PadRight(25) + ("Description").PadRight(25) + ("Amount").PadRight(25) + ("DateOfAccident").PadRight(25) + ("DateOfClaim").PadRight(25) + ("IsValid").PadRight(25));
+            Console.WriteLine("\n");
             foreach (Claim item in claimsDirectory)
             {
                 Console.WriteLine(($"{item.ClaimID}").PadRight(25) + ($"{item.TypeOfClaim}").PadRight(25) + ($"{item.Description}").PadRight(25) + ($"{item.ClaimAmount}").PadRight(25) + ($"{item.DateOfIncident.ToString("d")}").PadRight(25) + ($"{item.DateOfClaim.ToString("d")}").PadRight(25) + ($"{item.IsValid}").PadRight(25));
             }
+            Console.WriteLine("\n");
         }
 
         public void HandleNextClaim()
