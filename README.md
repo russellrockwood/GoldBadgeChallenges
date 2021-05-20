@@ -6,7 +6,7 @@ This solution contains three console applications that perfom basic CRUD operati
 * 03 Badge/Door access directory system
 
 ## Technology Used
-* Visual Studio 2019 Community
+* [Visual Studio 2019 Community](https://visualstudio.microsoft.com/downloads/)
 * C#
 * GitHub
 
