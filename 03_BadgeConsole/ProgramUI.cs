@@ -44,11 +44,11 @@ namespace _03_BadgeConsole
                 switch (userInput)
                 {
                     case "1":
-                        //AddBadge();
+                        AddBadge();
                         break;
 
                     case "2":
-                       //EditBadge();
+                        //EditBadge();
                         break;
 
                     case "3":
@@ -70,6 +70,44 @@ namespace _03_BadgeConsole
                 }
                 Console.WriteLine("Press any key to continue");
                 Console.ReadKey();
+            }
+        }
+
+        public void AddBadge()
+        {
+            Console.Clear();
+            Badge newBadge = new Badge();
+            List<Doors> newBadgeAccessList = new List<Doors>();
+
+            Console.WriteLine("Enter new badge number:");
+            newBadge.BadgeNumber = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Enter door number to grant access or type \"done\" when finished");
+            bool addingDoorAccess = true;
+            while (addingDoorAccess)
+            {
+                string userInput = Console.ReadLine();
+                if (userInput.ToLower() == "done")
+                {
+                    addingDoorAccess = false;
+                }
+                else
+                {
+                    Doors door = (Doors)Enum.Parse(typeof(Doors), userInput);
+                    newBadgeAccessList.Add(door);
+                    Console.WriteLine("Door access successfully added. Enter another door or type \"done\"");
+                }
+                //Animal animal = (Animal)Enum.Parse(typeof(Animal), str)
+            }
+            newBadge.DoorAccess = newBadgeAccessList;
+            bool newBadgeAdded =_repo.AddNewBadge(newBadge);
+            if (newBadgeAdded)
+            {
+                Console.WriteLine("New Badge Successfully Added :)");
+            }
+            else
+            {
+                Console.WriteLine("Error Adding New Badge");
             }
         }
     }
