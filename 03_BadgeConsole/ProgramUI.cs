@@ -56,7 +56,7 @@ namespace _03_BadgeConsole
                         break;
 
                     case "4":
-                        //RemoveBadge();
+                        RemoveBadge();
                         break;
 
                     case "5":
@@ -94,7 +94,7 @@ namespace _03_BadgeConsole
                 }
                 else
                 {
-                    Doors door = (Doors)Enum.Parse(typeof(Doors), userInput);
+                    Doors door = (Doors)Enum.Parse(typeof(Doors), userInput.ToUpper());
                     newBadgeAccessList.Add(door);
                     Console.WriteLine("Door access successfully added. Enter another door or type \"done\"");
                 }
@@ -145,7 +145,7 @@ namespace _03_BadgeConsole
                             }
                             else
                             {
-                                Doors door = (Doors)Enum.Parse(typeof(Doors), newDoor);
+                                Doors door = (Doors)Enum.Parse(typeof(Doors), newDoor.ToUpper());
                                 bool newDoorAddedCorrectly = _repo.AddDoorAccess(badgeNumber, door);
                                 if (newDoorAddedCorrectly)
                                 {
@@ -171,7 +171,7 @@ namespace _03_BadgeConsole
                             }
                             else
                             {
-                                Doors door = (Doors)Enum.Parse(typeof(Doors), doorToRemove);
+                                Doors door = (Doors)Enum.Parse(typeof(Doors), doorToRemove.ToUpper());
                                 bool doorAccessCorrectlyRemoved = _repo.RemoveDoorAccess(badgeNumber, door);
                                 if (doorAccessCorrectlyRemoved)
                                 {
@@ -207,6 +207,22 @@ namespace _03_BadgeConsole
                 Console.WriteLine(($"{item.Key}").PadRight(20) + string.Join(" ", item.Value));
             }
             Console.WriteLine("\n");
+        }
+        public void RemoveBadge()
+        {
+            Console.Clear();
+            Console.WriteLine("Enter badge number to delete from directory:");
+            int badgeNumber = Convert.ToInt32(Console.ReadLine());
+
+            bool badgeWasDeleted = _repo.DeleteBadge(badgeNumber);
+            if (badgeWasDeleted)
+            {
+                Console.WriteLine("Badge removed from directory.");
+            }
+            else
+            {
+                Console.WriteLine("Error Deleting Badge.");
+            }
         }
     }
 }
