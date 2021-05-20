@@ -21,8 +21,8 @@ namespace _03_BadgeConsole
         public void SeedBadgeDictionary()
         {
             Badge employee1 = new Badge(1234, new List<Doors> { Doors.A1, Doors.B1, Doors.EscapeTunnel });
-            Badge employee2 = new Badge(1235, new List<Doors> { Doors.A2, Doors.B2, Doors.A3, Doors.A4});
-            Badge employee3 = new Badge(1236, new List<Doors> {Doors.A1, Doors.A2, Doors.A3, Doors.B3, Doors.B4, Doors.EscapeTunnel });
+            Badge employee2 = new Badge(1235, new List<Doors> { Doors.A2, Doors.B2, Doors.A3, Doors.A4 });
+            Badge employee3 = new Badge(1236, new List<Doors> { Doors.A1, Doors.A2, Doors.A3, Doors.B3, Doors.B4, Doors.EscapeTunnel });
             _repo.AddNewBadge(employee1);
             _repo.AddNewBadge(employee2);
             _repo.AddNewBadge(employee3);
@@ -35,7 +35,7 @@ namespace _03_BadgeConsole
             {
                 Console.WriteLine("What would you like to do?\n" +
                     "1. Add A Badge\n" +
-                    "2. Edit A Badge\n" +
+                    "2. Edit Badge Access\n" +
                     "3. List All Badges\n" +
                     "4. Remove Badge From Directory\n" +
                     "5. Exit Console\n");
@@ -48,7 +48,7 @@ namespace _03_BadgeConsole
                         break;
 
                     case "2":
-                        //EditBadge();
+                        EditBadge();
                         break;
 
                     case "3":
@@ -98,10 +98,9 @@ namespace _03_BadgeConsole
                     newBadgeAccessList.Add(door);
                     Console.WriteLine("Door access successfully added. Enter another door or type \"done\"");
                 }
-                //Animal animal = (Animal)Enum.Parse(typeof(Animal), str)
             }
             newBadge.DoorAccess = newBadgeAccessList;
-            bool newBadgeAdded =_repo.AddNewBadge(newBadge);
+            bool newBadgeAdded = _repo.AddNewBadge(newBadge);
             if (newBadgeAdded)
             {
                 Console.WriteLine("New Badge Successfully Added :)");
@@ -112,6 +111,91 @@ namespace _03_BadgeConsole
             }
         }
 
+        public void EditBadge()
+        {
+            Console.Clear();
+            Console.WriteLine("Enter badge number to edit access:");
+            int badgeNumber = Convert.ToInt32(Console.ReadLine());
+            List<Doors> oldAccessList = _repo.GetAccessByID(badgeNumber);
+
+            Console.WriteLine("Current Access:\n");
+            Console.WriteLine(($"{badgeNumber}").PadRight(20) + string.Join(" ", oldAccessList) + "\n");
+
+            bool editingBadgeAccess = true;
+            while (editingBadgeAccess)
+            {
+
+                Console.WriteLine("Would you like to add or remove access?\n" +
+                    "1. Add\n" +
+                    "2. Remove\n" +
+                    "3. Main Menu\n");
+                string userInput = Console.ReadLine();
+
+                switch (userInput)
+                {
+                    case "1":
+                        Console.WriteLine("Enter door number to grant access or type \"done\" when finished");
+                        bool addingDoorAccess = true;
+                        while (addingDoorAccess)
+                        {
+                            string newDoor = Console.ReadLine();
+                            if (newDoor.ToLower() == "done")
+                            {
+                                addingDoorAccess = false;
+                            }
+                            else
+                            {
+                                Doors door = (Doors)Enum.Parse(typeof(Doors), newDoor);
+                                bool newDoorAddedCorrectly = _repo.AddDoorAccess(badgeNumber, door);
+                                if (newDoorAddedCorrectly)
+                                {
+                                    Console.WriteLine("Door access successfully added. Enter another door or type \"done\"");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Error Adding Door Access.");
+                                }
+                            }
+                        }
+                        break;
+
+                    case "2":
+                        Console.WriteLine("Enter door number to remove access or type \"done\" when finished");
+                        bool removingDoorAccess = true;
+                        while (removingDoorAccess)
+                        {
+                            string doorToRemove = Console.ReadLine();
+                            if (doorToRemove.ToLower() == "done")
+                            {
+                                removingDoorAccess = false;
+                            }
+                            else
+                            {
+                                Doors door = (Doors)Enum.Parse(typeof(Doors), doorToRemove);
+                                bool doorAccessCorrectlyRemoved = _repo.RemoveDoorAccess(badgeNumber, door);
+                                if (doorAccessCorrectlyRemoved)
+                                {
+                                    Console.WriteLine("Door access successfully removed. Enter another door or type \"done\"");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Error Removing Access.");
+                                }
+                            }
+                        }
+                        break;
+
+                    case "3":
+                        editingBadgeAccess = false;
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid Entry");
+                        break;
+                }
+            }
+
+        }
         public void ListBadges()
         {
             Console.Clear();
@@ -121,8 +205,8 @@ namespace _03_BadgeConsole
             foreach (var item in badgeDirectory)
             {
                 Console.WriteLine(($"{item.Key}").PadRight(20) + string.Join(" ", item.Value));
-                Console.WriteLine("\n");
             }
+            Console.WriteLine("\n");
         }
     }
 }
