@@ -10,3 +10,10 @@ This solution contains three console applications that perfom basic CRUD operati
 * C#
 * GitHub
 
+## Usage
+Once installed, set either 01_KomodoCafe_Console, 02_Claims_Console or 03_Badge_Console as the startup project and run the program. The user interface contains seed data which can be used to test CRUD operations.
+
+## Sample Views
+<img src="https://github.com/russellrockwood/GoldBadgeChallenges/blob/master/Images/ClaimMenu.jpg">
+<img src="https://github.com/russellrockwood/GoldBadgeChallenges/blob/master/Images/AllClaims.jpg">
+
